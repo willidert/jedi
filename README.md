@@ -2,14 +2,16 @@
 
 ## Tecnologias usadas
 
-* FastApi
-* Angular
-* Postgres
-* Docker
+- FastApi
+- Angular
+- Postgres
+- Docker
 
 ## Executando o projeto
 
 ### Sem docker
+
+#### API
 
 Executando sem o docker o banco usado será o Sqlite
 
@@ -26,6 +28,21 @@ Execute o projeto:
 ```shell
 uvicorn main:app --reload
 ```
+
+A api rodará na porta 8000 e pode ser [acessada](http://localhost:8000/) e possível ver a [documentação](http://localhost:8000/docs) gerada automaticamente pelo FastApi com base nos schemas
+
+#### Web
+
+Agora **na pasta** `web`:
+
+```shell
+
+cd web
+npm i
+npm run start
+```
+
+A aplicação [frontend](http://localhost:4200/) em angular usa a porta 4200
 
 ### Com docker
 
