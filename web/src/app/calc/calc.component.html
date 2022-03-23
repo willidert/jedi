@@ -1,14 +1,46 @@
 <form [formGroup]="calcForm">
-  <label class="form-label" for="investment_value">Investment Value:</label>
-  <input
-    formControlName="investment_value"
-    id="investment_value"
-    name="investment_value"
-    class="form-control"
-    type="text"
-  />
+  <div class="d-flex justify-content-between">
+    <div class="mb-3">
+      <label class="form-label" for="investment_value">Investment Value:</label>
+      <input
+        formControlName="investment_value"
+        id="investment_value"
+        name="investment_value"
+        class="form-control"
+        type="number"
+        required
+      />
 
-  <button type="submit" class="btn btn-primary" (click)="onSubmit()">
-    Save
-  </button>
+      <div
+        *ngIf="
+          investment_value?.invalid &&
+          (investment_value?.dirty || investment_value?.touched)
+        "
+        class="alert alert-danger"
+      >
+        <div *ngIf="investment_value?.errors?.['required']">
+          Investment Value is required.
+        </div>
+        <div *ngIf="investment_value?.errors?.['invalid_invest_value']">
+          The investment value cannot be less than the project value.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-sm d-flex justify-content-between">
+    <button type="submit" class="btn btn-primary" (click)="onSubmit()">
+      Calculate
+    </button>
+
+    <button type="submit" class="btn btn-danger" (click)="back()">
+      Cancel
+    </button>
+  </div>
 </form>
+
+<div class="container" *ngIf="returnInvestValue">
+  <div class="mt-3">
+    <p>Return on investment: {{ returnInvestValue }}</p>
+  </div>
+</div>
