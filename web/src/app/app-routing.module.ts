@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'create-project', component: ProjectFormComponent },
   { path: '', component: ProjectListComponent },
   { path: 'calc/:id', component: CalcComponent },
+  { path: 'edit/:id', component: ProjectFormComponent },
 ];
 
 @NgModule({

@@ -5,6 +5,7 @@ export interface IProject {
   begin_date: Date;
   end_date: Date;
   value: number;
+  risk: number;
 
   participants: Array<IParticipant>;
 }

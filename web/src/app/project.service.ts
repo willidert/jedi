@@ -29,4 +29,12 @@ export class ProjectService {
   update_project(project: IProject, id: number): Observable<IProject> {
     return this.client.patch<IProject>(`${API_PATH}/projects/${id}`, project);
   }
+
+  save(project: IProject): Observable<IProject> {
+    if (project.id) {
+      // update
+      return this.update_project(project, project.id);
+    }
+    return this.create_project(project);
+  }
 }

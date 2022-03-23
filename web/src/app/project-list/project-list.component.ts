@@ -43,7 +43,7 @@ export class ProjectListComponent implements OnInit {
   }
 
   onEdit(id: number) {
-    console.log(`projeto ${id} editado`);
+    this.router.navigate(['edit', id], { relativeTo: this.route });
   }
 
   onCalc(id: number) {
