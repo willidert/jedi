@@ -18,6 +18,7 @@
           <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Risk</th>
             <th>Value</th>
             <th>Begin Date</th>
             <th>End Date</th>
@@ -29,6 +30,7 @@
           <tr *ngFor="let project of projects">
             <td>{{ project.id }}</td>
             <td>{{ project.name }}</td>
+            <td>{{ project.risk }}</td>
             <td>{{ project.value }}</td>
             <td>{{ project.begin_date }}</td>
             <td>{{ project.end_date }}</td>
@@ -38,9 +40,9 @@
               </p>
             </td>
             <td>
-              <span class="float-right">
+              <div class="d-flex justify-content-evenly">
                 <button
-                  class="btn btn-outline-success mb-1 btn-sm"
+                  class="btn btn-outline-success mb-1 btn-sm disabled"
                   (click)="onEdit(project.id)"
                 >
                   Update
@@ -58,7 +60,7 @@
                 >
                   Calc
                 </button>
-              </span>
+              </div>
             </td>
           </tr>
         </tbody>
