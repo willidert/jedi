@@ -1,0 +1,73 @@
+<div class="card mt-3">
+  <div class="card-header">
+    <div class="d-flex justify-content-end">
+      <btn
+        class="btn btn-primary"
+        routerLink="create-project"
+        routerLinkActive="active"
+      >
+        New Project
+      </btn>
+    </div>
+    <div class="card-body">
+      <table
+        class="table table-hover"
+        *ngIf="projects$ | async as projects; else loading"
+      >
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Value</th>
+            <th>Begin Date</th>
+            <th>End Date</th>
+            <th>Participants</th>
+            <!-- <th>Atualizar|Remover</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let project of projects">
+            <td>{{ project.id }}</td>
+            <td>{{ project.name }}</td>
+            <td>{{ project.value }}</td>
+            <td>{{ project.begin_date }}</td>
+            <td>{{ project.end_date }}</td>
+            <td>
+              <p *ngFor="let participant of project.participants">
+                {{ participant.name }}
+              </p>
+            </td>
+            <td>
+              <span class="float-right">
+                <button
+                  class="btn btn-outline-success mb-1 btn-sm"
+                  (click)="onEdit(project.id)"
+                >
+                  Update
+                </button>
+
+                <button
+                  class="btn btn-outline-danger mb-1 btn-sm"
+                  (click)="onDelete(project.id)"
+                >
+                  Delete
+                </button>
+                <button
+                  class="btn btn-outline-info mb-1 btn-sm"
+                  (click)="onCalc(project)"
+                >
+                  Calc
+                </button>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ng-template #loading>
+        <span>Carregando Usuários...</span>
+      </ng-template>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
