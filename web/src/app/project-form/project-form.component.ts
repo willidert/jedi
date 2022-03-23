@@ -1,8 +1,8 @@
 import { ProjectService } from './../project.service';
 import { IProject } from './../IProject';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 @Component({
@@ -11,20 +11,24 @@ import { Location } from '@angular/common';
   styleUrls: ['./project-form.component.css'],
 })
 export class ProjectFormComponent implements OnInit {
-  // private project: IProject;
+  project_id?: string;
+
+  project?: IProject;
+
   projectForm = new FormGroup({
-    name: new FormControl(''),
-    value: new FormControl(''),
-    begin_date: new FormControl(''),
-    end_date: new FormControl(''),
-    risk: new FormControl(''),
-    participants: new FormControl(''),
+    name: new FormControl('', [Validators.required]),
+    value: new FormControl('', [Validators.required]),
+    begin_date: new FormControl('', [Validators.required]),
+    end_date: new FormControl('', [Validators.required]),
+    risk: new FormControl('', [Validators.required]),
+    participants: new FormControl('', [Validators.required]),
   });
 
   constructor(
     private projectService: ProjectService,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {}
@@ -40,7 +44,7 @@ export class ProjectFormComponent implements OnInit {
         });
       }
       project.participants = participants;
-      this.projectService.create_project(project).subscribe((project) => {
+      this.projectService.save(project).subscribe(() => {
         this.router.navigate(['/', '/']);
       });
     }
@@ -49,5 +53,24 @@ export class ProjectFormComponent implements OnInit {
   cancel() {
     this.projectForm.reset();
     this.location.back();
+  }
+
+  get name() {
+    return this.projectForm.get('name');
+  }
+  get value() {
+    return this.projectForm.get('value');
+  }
+  get begin_date() {
+    return this.projectForm.get('begin_date');
+  }
+  get end_date() {
+    return this.projectForm.get('end_date');
+  }
+  get risk() {
+    return this.projectForm.get('risk');
+  }
+  get participants() {
+    return this.projectForm.get('participants');
   }
 }
