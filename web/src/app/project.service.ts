@@ -14,7 +14,7 @@ export class ProjectService {
     return this.client.get<IProject[]>(`${API_PATH}/projects`);
   }
 
-  get_project_by_id(id: number): Observable<IProject> {
+  get_project_by_id(id: string): Observable<IProject> {
     return this.client.get<IProject>(`${API_PATH}/projects/${id}`);
   }
 

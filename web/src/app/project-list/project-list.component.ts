@@ -2,6 +2,7 @@ import { Observable, delay, tap } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { IProject } from '../IProject';
 import { ProjectService } from '../project.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-project-list',
@@ -21,7 +22,11 @@ export class ProjectListComponent implements OnInit {
     'participants',
   ];
 
-  constructor(private projectService: ProjectService) {}
+  constructor(
+    private projectService: ProjectService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.get_all_projects();
@@ -41,7 +46,7 @@ export class ProjectListComponent implements OnInit {
     console.log(`projeto ${id} editado`);
   }
 
-  onCalc(project: IProject) {
-    console.log(`projeto ${project.id} calculo`);
+  onCalc(id: number) {
+    this.router.navigate(['calc', id], { relativeTo: this.route });
   }
 }
