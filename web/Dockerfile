@@ -4,11 +4,11 @@ COPY package-lock.json .
 COPY package.json .
 RUN npm install
 COPY . /app
-# RUN npm run build
-EXPOSE 4200
-CMD ["npm", "run", "docker"]
+RUN npm run build
+# EXPOSE 4200
+# CMD ["npm", "run", "docker"]
 
-# FROM nginx:alpine
-# COPY ./default.conf /etc/nginx/nginx.conf
-# COPY --from=build /app/dist/web/ /usr/share/nginx/html
-# EXPOSE 80
+FROM nginx:alpine
+COPY ./default.conf /etc/nginx/nginx.conf
+COPY --from=build /app/dist/web/ /usr/share/nginx/html
+EXPOSE 80
