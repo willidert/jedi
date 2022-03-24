@@ -46,6 +46,12 @@ A aplicação [frontend](http://localhost:4200/) em angular usa a porta 4200
 
 ### Com docker
 
+copiar o `.env.example`:
+
+```shell
+cat .env.example > .env
+```
+
 A aplicação irá usar o Postgres
 
 ```shell
