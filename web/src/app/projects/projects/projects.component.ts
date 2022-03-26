@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { ProjectService } from './../../project.service';
 import { Component, OnInit } from '@angular/core';
 import { IProject } from 'src/app/projects/projects/model/IProject';
@@ -13,7 +13,11 @@ export class ProjectsComponent implements OnInit {
   displayedColumns = ['risk', 'name', 'begin_date', 'end_date', 'value'];
 
   constructor(private service: ProjectService) {
-    this.projects$ = this.service.get_projects();
+    this.projects$ = this.service.get_projects().pipe(
+      catchError((error) => {
+        return of([]);
+      })
+    );
   }
 
   ngOnInit(): void {}
