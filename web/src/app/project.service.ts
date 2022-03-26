@@ -1,4 +1,4 @@
-import { IProject } from './IProject';
+import { IProject } from './projects/projects/model/IProject';
 // import { API_PATH } from './../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';

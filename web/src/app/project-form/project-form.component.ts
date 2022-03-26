@@ -1,5 +1,5 @@
 import { ProjectService } from './../project.service';
-import { IProject } from './../IProject';
+import { IProject } from '../projects/projects/model/IProject';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';

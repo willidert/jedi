@@ -1,5 +1,5 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { IProject } from './../IProject';
+import { IProject } from '../projects/projects/model/IProject';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
