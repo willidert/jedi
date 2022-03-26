@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, take } from 'rxjs';
+import { first, Observable, take, tap } from 'rxjs';
 import { API_PATH } from 'src/environments/environment';
 import { IProject } from '../projects/model/IProject';
 
@@ -15,7 +15,10 @@ export class ProjectService {
   }
 
   get_projects(): Observable<IProject[]> {
-    return this.client.get<IProject[]>(`${this.API_URL}/projects`);
+    return this.client.get<IProject[]>(`${this.API_URL}/projects`).pipe(
+      first(),
+      tap((projects) => console.log(projects))
+    );
   }
 
   get_project_by_id(id: string): Observable<IProject> {
