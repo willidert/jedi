@@ -11,10 +11,14 @@ table {
 
 .example-flex-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .example-button-container {
   display: flex;
   justify-content: center;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
 }
