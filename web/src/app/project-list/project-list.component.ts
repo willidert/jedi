@@ -1,8 +1,8 @@
 import { Observable, delay, tap } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { IProject } from '../projects/projects/model/IProject';
-import { ProjectService } from '../project.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ProjectService } from '../projects/services/projects.service';
 
 @Component({
   selector: 'app-project-list',

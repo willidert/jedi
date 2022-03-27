@@ -1,9 +1,9 @@
-import { ProjectService } from './../project.service';
 import { IProject } from '../projects/projects/model/IProject';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { ProjectService } from '../projects/services/projects.service';
 
 @Component({
   selector: 'app-project-form',

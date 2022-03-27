@@ -1,5 +1,5 @@
+import { ProjectService } from './../services/projects.service';
 import { catchError, Observable, of } from 'rxjs';
-import { ProjectService } from './../../project.service';
 import { Component, OnInit } from '@angular/core';
 import { IProject } from 'src/app/projects/projects/model/IProject';
 import { MatDialog } from '@angular/material/dialog';
