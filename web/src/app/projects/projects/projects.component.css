@@ -8,3 +8,13 @@ table {
   align-items: center;
   justify-content: center;
 }
+
+.example-flex-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: center;
+}
