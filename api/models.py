@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, Date, Float
+from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, Float
 from sqlalchemy.orm import relationship
 
 from database import Base
@@ -9,8 +9,8 @@ class Project(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(length=200))
-    begin_date = Column(Date)
-    end_date = Column(Date)
+    begin_date = Column(DateTime)
+    end_date = Column(DateTime)
     risk = Column(Integer)
     value = Column(Float(precision=2, asdecimal=True))
 

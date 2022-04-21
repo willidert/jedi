@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 from typing import List, Optional
 
 from pydantic import BaseModel
@@ -22,8 +22,8 @@ class Participant(ParticipantBase):
 
 class ProjectBase(BaseModel):
     name: str
-    begin_date: date
-    end_date: date
+    begin_date: datetime
+    end_date: datetime
     value: float
     risk: int
     participants: List[ParticipantBase] = []
@@ -43,6 +43,6 @@ class Project(ProjectBase):
 class ProjectUpdate(ProjectBase):
     risk: Optional[int]
     name: Optional[str]
-    begin_date: Optional[date]
-    end_date: Optional[date]
+    begin_date: Optional[datetime]
+    end_date: Optional[datetime]
     value: Optional[float]
