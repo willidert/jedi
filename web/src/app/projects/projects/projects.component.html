@@ -82,6 +82,18 @@
                   <mat-icon>edit</mat-icon>
                 </button>
               </div>
+              <div class="example-button-container">
+                <button
+                  mat-mini-fab
+                  matTooltip="Calc average"
+                  matTooltipPosition="before"
+                  color="accent"
+                  aria-label="Delete project"
+                  (click)="openDialog(project.id)"
+                >
+                  <mat-icon>more</mat-icon>
+                </button>
+              </div>
             </div>
           </div>
         </td>
