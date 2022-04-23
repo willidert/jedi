@@ -22,8 +22,10 @@ export class ProjectService {
     );
   }
 
-  get_project_by_id(id: string): Observable<IProject> {
-    return this.client.get<IProject>(`${this.API_URL}/projects/${id}`);
+  get_project_by_id(id: number): Observable<IProject> {
+    return this.client
+      .get<IProject>(`${this.API_URL}/projects/${id}`)
+      .pipe(tap((_) => console.log(`${id} coletado`)));
   }
 
   create_project(project: IProject): Observable<IProject> {

@@ -1,4 +1,4 @@
-import { IParticipant } from '../../../IParticipant';
+import { IParticipant } from './IParticipant';
 export interface IProject {
   id: number;
   name: string;

@@ -33,12 +33,12 @@ export class CalcComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((param) => {
-      this.project_id = param['id'];
-      this.projectService
-        .get_project_by_id(this.project_id)
-        .subscribe((project) => (this.project = project));
-    });
+    // this.route.params.subscribe((param) => {
+    //   this.project_id = param['id'];
+    //   this.projectService
+    //     .get_project_by_id(this.project_id)
+    //     .subscribe((project) => (this.project = project));
+    // });
   }
 
   onSubmit() {
