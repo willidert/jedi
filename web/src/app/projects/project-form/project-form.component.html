@@ -1,21 +1,108 @@
-<form [formGroup]="projectForm">
-  <mat-form-field appearance="fill">
-    <mat-label>Input</mat-label>
-    <input matInput />
-  </mat-form-field>
+<mat-card>
+  <form [formGroup]="projectForm">
+    <mat-grid-list cols="4" rowHeight="100px">
+      <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Project name</mat-label>
+          <input
+            matInput
+            #input
+            maxlength="50"
+            formControlName="name"
+            placeholder="Ex. My Project"
+          />
+          <mat-hint align="end">{{ input.value?.length || 0 }}/50</mat-hint>
+        </mat-form-field>
+      </mat-grid-tile>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Select</mat-label>
-    <mat-select>
-      <mat-option value="one">First option</mat-option>
-      <mat-option value="two">Second option</mat-option>
-    </mat-select>
-  </mat-form-field>
+      <mat-grid-tile colspan="3" rowspan="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Participants</mat-label>
+          <mat-chip-list #chipList aria-label="Participants">
+            <mat-chip
+              *ngFor="let participant of participants"
+              (removed)="remove(participant)"
+            >
+              {{ participant.name }}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+            <input
+              placeholder="New participant"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="add($event)"
+            />
+          </mat-chip-list>
+        </mat-form-field>
+      </mat-grid-tile>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Textarea</mat-label>
-    <textarea matInput></textarea>
-  </mat-form-field>
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Project value</mat-label>
+          <input
+            currencyMask
+            matInput
+            formControlName="value"
+            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+          />
+        </mat-form-field>
+      </mat-grid-tile>
 
-  <button (click)="onSubmit()">criar</button>
-</form>
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Risk</mat-label>
+          <mat-select formControlName="risk">
+            <mat-option value="0">Low</mat-option>
+            <mat-option value="1">Medium</mat-option>
+            <mat-option value="2">High</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Begin date</mat-label>
+          <input
+            matInput
+            formControlName="begin_date"
+            [matDatepicker]="picker"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>End date</mat-label>
+          <input
+            matInput
+            formControlName="end_date"
+            [matDatepicker]="endpicker"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="endpicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #endpicker></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <div class="flex-container">
+      <button mat-raised-button color="primary" (click)="onSubmit()">
+        create
+      </button>
+
+      <button mat-raised-button color="warn" (click)="onCancel()">
+        cancel
+      </button>
+    </div>
+  </form>
+</mat-card>
