@@ -7,10 +7,8 @@
       matTooltip="Create project"
       matTooltipPosition="before"
       aria-label="Create project"
-      routerLink="create"
-      routerLinkActive="active"
     >
-      <mat-icon>add</mat-icon>
+      <mat-icon (click)="onAdd()">add</mat-icon>
     </button>
   </mat-toolbar>
   <div *ngIf="projects$ | async as projects; else loading">

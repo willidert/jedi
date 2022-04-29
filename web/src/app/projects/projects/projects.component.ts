@@ -6,6 +6,7 @@ import { IProject } from 'src/app/projects/projects/model/IProject';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 
 import { ProjectService } from './../services/projects.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-projects',
@@ -24,7 +25,12 @@ export class ProjectsComponent implements OnInit {
     'actions',
   ];
 
-  constructor(private service: ProjectService, public dialog: MatDialog) {
+  constructor(
+    private service: ProjectService,
+    public dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.projects$ = this.service.get_projects().pipe(
       catchError((error) => {
         this.onError('Loading projects failed!');
@@ -34,6 +40,10 @@ export class ProjectsComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  onAdd() {
+    this.router.navigate(['create'], { relativeTo: this.route });
+  }
 
   onError(errorMsg: string) {
     this.dialog.open(ErrorDialogComponent, {
