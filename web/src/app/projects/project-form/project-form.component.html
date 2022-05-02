@@ -55,9 +55,9 @@
         <mat-form-field appearance="outline">
           <mat-label>Risk</mat-label>
           <mat-select formControlName="risk">
-            <mat-option value="0">Low</mat-option>
-            <mat-option value="1">Medium</mat-option>
-            <mat-option value="2">High</mat-option>
+            <mat-option value="low">Low</mat-option>
+            <mat-option value="medium">Medium</mat-option>
+            <mat-option value="high">High</mat-option>
           </mat-select>
         </mat-form-field>
       </mat-grid-tile>
@@ -97,11 +97,11 @@
 
     <div class="flex-container">
       <button mat-raised-button color="primary" (click)="onSubmit()">
-        create
+        Save
       </button>
 
       <button mat-raised-button color="warn" (click)="onCancel()">
-        cancel
+        Cancel
       </button>
     </div>
   </form>

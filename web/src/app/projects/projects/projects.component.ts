@@ -57,6 +57,10 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
+  onEdit(id: number): void {
+    this.router.navigate([`edit/{id}`], { relativeTo: this.route });
+  }
+
   openDialog(id: number): void {
     // isso aqui ta muito feio pqp
     console.log(id);

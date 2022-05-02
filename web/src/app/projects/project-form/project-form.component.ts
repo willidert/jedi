@@ -23,15 +23,18 @@ export class ProjectFormComponent implements OnInit {
     value: new FormControl('', Validators.required),
   });
 
+  selected_project!: IProject;
+  id!: number;
+
+  addOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  participants: IParticipant[] = [];
+
   constructor(
     private service: ProjectService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
-
-  addOnBlur = true;
-  readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  participants: IParticipant[] = [];
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
@@ -53,7 +56,16 @@ export class ProjectFormComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.params.subscribe((e) => (this.id = e['id']));
+    if (this.id) {
+      this.service.get_project_by_id(this.id).subscribe((e) => {
+        // this.selected_project = e;
+        this.projectForm.patchValue(e);
+        this.participants = e.participants;
+      });
+    }
+  }
 
   onSubmit() {
     // tem q ter outra forma de fzr isso aqui
@@ -62,14 +74,12 @@ export class ProjectFormComponent implements OnInit {
     project.participants = this.participants;
     project_model.begin_date = project.begin_date.toJSON();
     project_model.end_date = project.end_date.toJSON();
-    console.log(project_model);
     this.service
       .create_project(project)
       .subscribe((p) => this.router.navigate([''], { relativeTo: this.route }));
   }
 
   onCancel() {
-    console.log('cancelei');
     this.router.navigate([''], { relativeTo: this.route });
   }
 }
