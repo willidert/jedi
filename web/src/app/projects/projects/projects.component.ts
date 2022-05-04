@@ -61,20 +61,15 @@ export class ProjectsComponent implements OnInit {
     this.router.navigate([`edit/{id}`], { relativeTo: this.route });
   }
 
-  openDialog(id: number): void {
-    // isso aqui ta muito feio pqp
-    console.log(id);
-    this.service.get_project_by_id(id).subscribe((p) => {
-      this.project = p;
-      console.log(this.project);
-      const dialogRef = this.dialog.open(CalcDialogComponent, {
-        width: '250px',
-        data: this.project,
-      });
+  openDialog(project_data: IProject): void {
+    console.log(project_data);
+    const dialogRef = this.dialog.open(CalcDialogComponent, {
+      width: '250px',
+      data: project_data,
+    });
 
-      dialogRef.afterClosed().subscribe((result) => {
-        console.log('The dialog was closed');
-      });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
     });
   }
 }
