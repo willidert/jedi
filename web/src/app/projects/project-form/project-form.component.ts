@@ -68,14 +68,11 @@ export class ProjectFormComponent implements OnInit {
   }
 
   onSubmit() {
-    // tem q ter outra forma de fzr isso aqui
-    let project = this.projectForm.value;
+    console.log(this.projectForm.value);
     let project_model: IProject = this.projectForm.value;
-    project.participants = this.participants;
-    project_model.begin_date = project.begin_date.toJSON();
-    project_model.end_date = project.end_date.toJSON();
+    project_model.participants = this.participants;
     this.service
-      .create_project(project)
+      .create_project(project_model)
       .subscribe((p) => this.router.navigate([''], { relativeTo: this.route }));
   }
 
