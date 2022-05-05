@@ -58,7 +58,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   onEdit(id: number): void {
-    this.router.navigate([`edit/{id}`], { relativeTo: this.route });
+    this.router.navigate([`edit/${id}`], { relativeTo: this.route });
   }
 
   openDialog(project_data: IProject): void {
