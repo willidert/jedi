@@ -54,10 +54,13 @@
       <mat-grid-tile>
         <mat-form-field appearance="outline">
           <mat-label>Risk</mat-label>
-          <mat-select formControlName="risk">
-            <mat-option value="0">Low</mat-option>
+          <mat-select formControlName="risk" ngModel="selected_risk">
+            <mat-option *ngFor="let risk of risks" [value]="risk.id">{{
+              risk.name
+            }}</mat-option>
+            <!-- <mat-option value="0">Low</mat-option>
             <mat-option value="1">Medium</mat-option>
-            <mat-option value="2">High</mat-option>
+            <mat-option value="2">High</mat-option> -->
           </mat-select>
         </mat-form-field>
       </mat-grid-tile>
