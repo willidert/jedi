@@ -19,7 +19,6 @@ export class ProjectFormComponent implements OnInit {
     begin_date: new FormControl(null, Validators.required),
     end_date: new FormControl(null, Validators.required),
     risk: new FormControl(null, Validators.required),
-    // participants: new FormControl('', Validators.required),
     value: new FormControl(null, Validators.required),
   });
 
@@ -68,16 +67,12 @@ export class ProjectFormComponent implements OnInit {
       this.service.get_project_by_id(this.id).subscribe((e) => {
         this.projectForm.patchValue(e);
         this.participants = e.participants;
-        this.selected_risk = e.risk; // parei aqui no risco
-        console.log(this.selected_risk);
-        // isso aqui deveria funcionar pq o value é number junto c o q retorna da api
-        // preciso alterar o button de editar p startar o evento
+        this.selected_risk = e.risk;
       });
     }
   }
 
   onSubmit() {
-    console.log(this.projectForm.value);
     let project_model: IProject = this.projectForm.value;
     project_model.participants = this.participants;
     this.service
@@ -86,6 +81,7 @@ export class ProjectFormComponent implements OnInit {
   }
 
   onCancel() {
+    this.projectForm.reset();
     this.router.navigate([''], { relativeTo: this.route });
   }
 }

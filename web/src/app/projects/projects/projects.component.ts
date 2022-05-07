@@ -15,7 +15,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ProjectsComponent implements OnInit {
   projects$: Observable<IProject[]>;
-  project: IProject | undefined;
+  project: IProject = {
+    id: 1,
+    name: 'Teste',
+    begin_date: new Date(),
+    end_date: new Date(),
+    participants: [],
+    risk: 2,
+    value: 3221.2,
+  };
   displayedColumns = [
     'risk',
     'name',
@@ -33,8 +41,8 @@ export class ProjectsComponent implements OnInit {
   ) {
     this.projects$ = this.service.get_projects().pipe(
       catchError((error) => {
-        this.onError('Loading projects failed!');
-        return of([]);
+        this.onError('Loading projects failed! Using mocked project');
+        return of([this.project]);
       })
     );
   }
@@ -62,9 +70,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   openDialog(project_data: IProject): void {
-    console.log(project_data);
     const dialogRef = this.dialog.open(CalcDialogComponent, {
-      width: '250px',
       data: project_data,
     });
 
