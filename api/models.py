@@ -21,7 +21,7 @@ class Participant(Base):
     __tablename__ = "participants"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String)
+    name = Column(String(length=200))
     project_id = Column(Integer, ForeignKey("projects.id"))
     
     member = relationship("Project", back_populates="participants")
