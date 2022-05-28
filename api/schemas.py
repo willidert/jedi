@@ -1,7 +1,7 @@
 from datetime import date, datetime
 from typing import List, Optional
 
-from pydantic import BaseModel, conlist
+from pydantic import BaseModel, condecimal, conlist
 
 
 class ParticipantBase(BaseModel):
@@ -24,7 +24,7 @@ class ProjectBase(BaseModel):
     name: str
     begin_date: datetime
     end_date: datetime
-    value: float
+    value: condecimal(gt=0)
     risk: int
     participants: conlist(ParticipantBase, min_items=1)
 
@@ -45,5 +45,13 @@ class ProjectUpdate(ProjectBase):
     name: Optional[str]
     begin_date: Optional[datetime]
     end_date: Optional[datetime]
-    value: Optional[float]
+    value: Optional[condecimal(gt=0)]
     participants: Optional[conlist(ParticipantBase, min_items=1)]
+
+
+class ProjectInvestiment(BaseModel):
+    value: condecimal(gt=0)
+
+
+class ResponseProjectInvestment(BaseModel):
+    returned_value: float
