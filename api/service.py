@@ -1,3 +1,5 @@
+from decimal import Decimal
+from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
 import models, schemas
@@ -42,3 +44,14 @@ def create_project_participant(db: Session, participant: schemas.ParticipantCrea
     db_participant = models.Participant(**participant, project_id=project_id)
     db.add(db_participant)
     db.commit()
+
+def calc_investment_value(db: Session, value: schemas.ProjectInvestiment, project_id: int):
+    project: models.Project = get_project(db, project_id)
+    if(value.value < project.value):
+        raise HTTPException(status_code=400, detail="amount invested cannot be less than the value of the project")
+    if(project.risk == 0):
+        return schemas.ResponseProjectInvestment(returned_value=Decimal(0.05) * value.value)
+    elif(project.risk == 1):
+        return schemas.ResponseProjectInvestment(returned_value=Decimal(0.1) * value.value)
+    else:
+        return schemas.ResponseProjectInvestment(returned_value=Decimal(0.2) * value.value)

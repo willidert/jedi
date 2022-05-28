@@ -48,6 +48,10 @@ def get_project(project_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Project not found")
     return project
 
+@app.post("/projects/{project_id}/calc")
+def calc_investment(project_id: int, value: schemas.ProjectInvestiment, db: Session = Depends(get_db)):
+    return service.calc_investment_value(db, value, project_id=project_id)
+
 @app.patch("/projects/{project_id}")
 def update_project(project_id: int, project: schemas.ProjectUpdate, db: Session = Depends(get_db)):
     return service.update_project(db, project, project_id=project_id)
