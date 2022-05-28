@@ -140,7 +140,28 @@ def test_update_project():
     assert data['id'] == MOCKED_PROJECT['project_id']
     assert data['name'] == 'my test project updated'
 
+def test_calc_investment():
+    response = client.post(f"/projects/{MOCKED_PROJECT['project_id']}/calc", json={"value": "0"})
+
+    assert response.status_code == 422, response.text
+    data = response.json()
+    print(data)
+    assert data['detail'][0]['msg'] == 'ensure this value is greater than 0'
+    assert data['detail'][0]['type'] == 'value_error.number.not_gt'
+
+    response = client.post(f"/projects/{MOCKED_PROJECT['project_id']}/calc", json={"value": "1"})
+
+    assert response.status_code == 400, response.text
+    data = response.json()
+    assert data['detail'] == 'amount invested cannot be less than the value of the project'
+
+    response = client.post(f"/projects/{MOCKED_PROJECT['project_id']}/calc", json={"value": "15"})
+
+    assert response.status_code == 200, response.text
+    data = response.json()
+
 def test_delete_project():
     response = client.delete(f"/projects/{MOCKED_PROJECT['project_id']}")
     assert response.status_code == 200, response.text
     assert response.json() == 'deletado'
+
